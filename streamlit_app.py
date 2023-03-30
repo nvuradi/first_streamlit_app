@@ -24,4 +24,4 @@ st.text(fruityvice_response.json())
 #take the json response and normalize it
 fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
 # Convert the json to df and display the df
-pd.dataframe(fruityvice_normalized)
+st.dataframe(fruityvice_normalized)
