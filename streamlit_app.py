@@ -19,8 +19,8 @@ fruits_selected=st.multiselect("Pick some fruits:", list(my_fruit_list.index),['
 fruits_to_show = my_fruit_list.loc[fruits_selected]
 st.dataframe(fruits_to_show)
 fruityvice_response = r.get("https://fruityvice.com/api/fruit/watermelon")
-st.text(fruityvice_response.json())
 
+st.header("Fruityvice Fruit Advice!")
 #take the json response and normalize it
 fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
 # Convert the json to df and display the df
