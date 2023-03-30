@@ -18,9 +18,12 @@ st.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 fruits_selected=st.multiselect("Pick some fruits:", list(my_fruit_list.index),['Avocado','Strawberries'])
 fruits_to_show = my_fruit_list.loc[fruits_selected]
 st.dataframe(fruits_to_show)
-fruityvice_response = r.get("https://fruityvice.com/api/fruit/"+"kiwi")
+
 
 st.header("Fruityvice Fruit Advice!")
+fruit_choice=st.text_input('What fruit would you like information about?','Kiwi')
+st.write('The user entered ', fruit_choice)
+fruityvice_response = r.get("https://fruityvice.com/api/fruit/"+fruit_choice)
 #take the json response and normalize it
 fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
 # Convert the json to df and display the df
