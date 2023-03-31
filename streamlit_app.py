@@ -26,14 +26,18 @@ st.dataframe(fruits_to_show)
 
 
 st.header("Fruityvice Fruit Advice!")
-fruit_choice=st.text_input('What fruit would you like information about?','Kiwi')
-st.write('The user entered ', fruit_choice)
-fruityvice_response = r.get("https://fruityvice.com/api/fruit/"+fruit_choice)
+try:
+  fruit_choice=st.text_input('What fruit would you like information about?','Kiwi')
+  if not fruit_choice:
+    st.error("Please select a fruit to get information.")
+  else:
+    fruityvice_response = r.get("https://fruityvice.com/api/fruit/"+fruit_choice)
 #take the json response and normalize it
-fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
+    fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
 # Convert the json to df and display the df
-st.dataframe(fruityvice_normalized)
-
+    st.dataframe(fruityvice_normalized)
+except URLError as e:
+  st.error()
 st.stop();
 #add snowflake information
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
