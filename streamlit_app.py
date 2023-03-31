@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import requests as r
 import snowflake.connector
+import from urllib.error import URLError
 
 
 
@@ -33,6 +34,7 @@ fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
 # Convert the json to df and display the df
 st.dataframe(fruityvice_normalized)
 
+st.stop();
 #add snowflake information
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 my_cur = my_cnx.cursor()
@@ -46,4 +48,4 @@ st.write('The user entered ', add_my_fruit)
 
 my_cur.execute("insert into PC_RIVERY_DB.PUBLIC.fruit_load_list values ('from st')");
 
-st.stop();
+
