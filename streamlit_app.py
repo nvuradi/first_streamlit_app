@@ -42,14 +42,19 @@ try:
     st.dataframe(back_from_function)
 except URLError as e:
   st.error()
-st.stop();
+
 #add snowflake information
-my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
-my_cur = my_cnx.cursor()
-my_cur.execute("SELECT * from fruit_load_list")
-my_data_row = my_cur.fetchall()
-st.text("The fruit load list contains:")
-st.dataframe(my_data_row)
+st.header("The fruit load list contains:")
+def get_fruit_load_list():
+  with my_cnx.cursor() as my_cur:
+    my_cur.execute("SELECT * from fruit_load_list")
+    return my_cur.fetchall()
+  
+if st.button('Get Fruit Load List'):
+  my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+  my_data_row = my_cur.fetchall()
+  st.text("The fruit load list contains:")
+  st.dataframe(my_data_row)
 
 add_my_fruit=st.text_input('What fruit would you like do?','Jackfruit')
 st.write('The user entered ', add_my_fruit)
