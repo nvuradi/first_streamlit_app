@@ -59,7 +59,7 @@ if st.button('Get Fruit Load List'):
 #another function
 def insert_row_snowflake(new_fruit):
   with my_cnx.cursor() as my_cur:
-    my_cur.execute("insert into PC_RIVERY_DB.PUBLIC.fruit_load_list values ('"+ ???? +"')")
+    my_cur.execute("insert into PC_RIVERY_DB.PUBLIC.fruit_load_list values ('"+ new_fruit +"')")
     return "Thanks for adding " + new_fruit
   
 add_my_fruit=st.text_input('What fruit would you like do?')
