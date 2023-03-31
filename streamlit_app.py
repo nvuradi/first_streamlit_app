@@ -28,7 +28,7 @@ st.dataframe(fruits_to_show)
 def get_fruityvice_data(this_fruit_choice):
   fruityvice_response = r.get("https://fruityvice.com/api/fruit/"+fruit_choice)
 #take the json response and normalize it
-    fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
+  fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
   return fruityvice_normalized
 
 
