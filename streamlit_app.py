@@ -3,6 +3,9 @@ import pandas as pd
 import requests as r
 import snowflake.connector
 
+
+
+
 my_fruit_list = pd.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
 my_fruit_list = my_fruit_list.set_index('Fruit')
 st.title("My Mom's New Healthy Diner")
@@ -29,3 +32,11 @@ fruityvice_response = r.get("https://fruityvice.com/api/fruit/"+fruit_choice)
 fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
 # Convert the json to df and display the df
 st.dataframe(fruityvice_normalized)
+
+#add snowflake information
+my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+my_cur = my_cnx.cursor()
+my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
+my_data_row = my_cur.fetchone()
+st.text("Hello from Snowflake:")
+st.text(my_data_row)
